@@ -19,6 +19,6 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 - [ ] Make it deploy (not sure where, might just use vercel for this)
 - [ ] Scaffold basic ui with mock data
 - [ ] Actually set up database
-- [ ] attach databse to UI
-- [ ] Add authentication (supabase auth? next auth? not sure, or use clerk if its too hard)
+- [ ] attach database to UI
+- [ ] Add authentication (supabase auth? next auth? not sure, but figure it out)
 
