@@ -8,6 +8,7 @@ import {
   serial,
   timestamp,
   varchar,
+  text,
 } from "drizzle-orm/pg-core";
 
 /**
@@ -19,7 +20,7 @@ import {
 export const createTable = pgTableCreator((name) => `val-lineup-dex_${name}`);
 
 export const posts = createTable(
-  "post",
+  "posts_table",
   {
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }),
@@ -34,3 +35,14 @@ export const posts = createTable(
     nameIndex: index("name_idx").on(example.name),
   })
 );
+
+// export const users = createTable(
+//   "users_table",
+//   {
+//     id: serial("id").primaryKey(),
+//     name: varchar("name", { length: 256 }),
+//     email: text("email").notNull().unique(),
+//   }
+// );
+
+
