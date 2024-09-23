@@ -11,22 +11,23 @@ export const ourFileRouter = {
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
-      const user = await auth();
+      const session = await auth();
  
-      // If you throw, the user will not be able to upload
-      if (!user?.user) throw new UploadThingError("Unauthorized");
+      // If you throw, the session will not be able to upload
+      if (!session?.user) throw new UploadThingError("Unauthorized");
  
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId: user.user.id };
+      // nick addition: putting email in bc fuck making ID persist in auth.ts.
+      return { userEmail: session.user.email };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
+      console.log("Upload complete for user (email):", metadata.userEmail);
  
       console.log("file url", file.url);
  
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.userId };
+      return { uploadedBy: metadata.userEmail };
     }), 
 } satisfies FileRouter;
  
