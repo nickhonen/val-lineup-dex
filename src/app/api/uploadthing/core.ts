@@ -1,6 +1,8 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { auth } from "auth";
+import { db } from "~/server/db";
+import { images } from "~/server/db/schema";
  
 const f = createUploadthing();
  
@@ -24,6 +26,11 @@ export const ourFileRouter = {
       // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete for user (email):", metadata.userEmail);
  
+      await db.insert(images).values({
+        name: file.name,
+        url: file.url,
+      })
+      
       console.log("file url", file.url);
  
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
