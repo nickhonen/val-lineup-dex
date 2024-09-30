@@ -1,17 +1,25 @@
+'use client';
+
 import { UploadButton } from "~/utils/uploadthing";
-import SignIn from "../login";
-// import { auth } from "auth";
+import SignInClient from "../signin-client";
+import { useRouter } from "next/navigation";
 
-export const TopNav = async () => {
+export const TopNav = () => {
 
-  // const session = await auth()
-  
+  const router = useRouter();
+
   return (
     <nav className="flex w-full items-center justify-between border-b p-4 text-xl 
     font-semibold">
       <div>Lineups</div>
-      <SignIn />
-      <UploadButton endpoint="imageUploader" />
+      <SignInClient />
+      <UploadButton 
+        endpoint="imageUploader"
+        onClientUploadComplete={() => {
+          router.refresh();
+        }}
+      />
+
     </nav>
   )
 }
