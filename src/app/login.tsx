@@ -1,6 +1,6 @@
-import { signIn } from "auth";
+import { signIn, signOut } from "auth";
 
-export default function SignIn() {
+export function SignIn() {
   return (
     <form
       action={async () => {
@@ -13,6 +13,24 @@ export default function SignIn() {
         className="hover: rounded bg-blue-500 bg-blue-700 px-4 py-2 text-white"
       >
         Sign in
+      </button>
+    </form>
+  );
+}
+
+export function SignOut() {
+  return (
+    <form
+      action={async () => {
+        "use server";
+        await signOut();
+      }}
+    >
+      <button
+        type="submit"
+        className="hover: rounded bg-blue-500 bg-blue-700 px-4 py-2 text-white"
+      >
+        Sign out
       </button>
     </form>
   );

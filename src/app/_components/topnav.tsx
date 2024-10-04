@@ -1,8 +1,9 @@
 'use client';
 
 import { UploadButton } from "~/utils/uploadthing";
-import SignInClient from "../signin-client";
+import UserButton from "../components/user-button"
 import { useRouter } from "next/navigation";
+
 
 export const TopNav = () => {
 
@@ -12,14 +13,13 @@ export const TopNav = () => {
     <nav className="flex w-full items-center justify-between border-b p-4 text-xl 
     font-semibold">
       <div>Lineups</div>
-      <SignInClient />
+      <UserButton />
       <UploadButton 
         endpoint="imageUploader"
         onClientUploadComplete={() => {
           router.refresh();
         }}
       />
-
     </nav>
   )
 }
