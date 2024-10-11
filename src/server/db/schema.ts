@@ -28,11 +28,11 @@ export const images = createTable(
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    userId: varchar("userId", { length: 256 }).notNull(),
+    email: varchar("email", { length: 256 }).notNull(),
   },
   (example) => ({
     nameIndex: index("name_idx").on(example.name),
-  })
+  }),
 );
 
 // export const users = createTable(
@@ -43,5 +43,3 @@ export const images = createTable(
 //     email: text("email").notNull().unique(),
 //   }
 // );
-
-

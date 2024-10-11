@@ -7,15 +7,15 @@ import { auth } from "auth";
 // data access layer and DTO? See next js authorization docs for example
 
 export async function getMyImages() {
+  const session = await auth();
 
-    const session = await auth();
+  if (!session?.user) return [];
+  if (!session.user.email) throw new Error("Unauthorized");
 
-    if (!session?.user.id) throw new Error("Unauthorized");
-
-    const images = await db.query.images.findMany({
-        where: (images, { eq }) => eq(images.userId, session.user.id),
-        // I think this orders images by newest images first? Right?
-        orderBy: (images, { desc }) => desc(images.id),
-    });
-    return images;
+  const images = await db.query.images.findMany({
+    where: (images, { eq }) => eq(images.email, session.user.email),
+    // I think this orders images by newest images first? Right?
+    orderBy: (images, { desc }) => desc(images.id),
+  });
+  return images;
 }

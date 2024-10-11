@@ -6,7 +6,7 @@ import { ourFileRouter } from "./api/uploadthing/core";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { TopNav } from "./_components/topnav";
+import Header from "./header";
 
 export const metadata: Metadata = {
   title: "Valorant Lineup Index",
@@ -19,10 +19,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      
       <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
       <body className="flex-col gap-4">
-        <TopNav />
+        <Header />
         {children}
       </body>
     </html>
