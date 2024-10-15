@@ -17,17 +17,19 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
   modal,
-}: Readonly<{
+}: {
   children: React.ReactNode;
   modal: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-      <body className="flex-col gap-4">
-        <Header />
-        {children}
-        {modal}
+      <body className={`flex-col gap-4 font-sans`}>
+        <div>
+          <Header />
+          <main className="overflow-y-scroll">{children}</main>
+          {modal}
+        </div>
         <div id="modal-root" />
       </body>
     </html>
