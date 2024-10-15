@@ -6,9 +6,12 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
-    typescript: {
-        ignoreBuildErrors: true,
-    }
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  images: {
+    remotePatterns: [{ hostname: "utfs.io" }],
+  },
 };
 
 export default config;
