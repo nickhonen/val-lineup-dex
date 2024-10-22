@@ -1,6 +1,4 @@
 import FullPageImageView from "~/app/components/full-page-image";
-import { Modal } from "./modal";
-import { getImage } from "~/server/queries";
 
 export default async function PhotoPage({
   params: { id: photoId },
@@ -11,5 +9,9 @@ export default async function PhotoPage({
   const idToNumber = Number(photoId);
   if (Number.isNaN(idToNumber)) throw new Error("Invalid photoId");
 
-  return <FullPageImageView photoId={idToNumber} />;
+  return (
+    <div className="h-full">
+      <FullPageImageView photoId={idToNumber} />;
+    </div>
+  );
 }
