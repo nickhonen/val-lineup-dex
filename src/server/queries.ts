@@ -19,3 +19,17 @@ export async function getMyImages() {
   });
   return images;
 }
+
+export async function getImage(id: number) {
+  const session = await auth();
+
+  if (!session?.user) throw new Error("Unauthorized");
+
+  const image = await db.query.images.findFirst({
+    where: (images, { eq }) => eq(images.id, id),
+  });
+
+  if (!image) throw new Error("Image not found");
+
+  return image;
+}
