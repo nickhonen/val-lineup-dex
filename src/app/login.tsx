@@ -1,4 +1,5 @@
 import { signIn, signOut } from "auth";
+import { Button } from "~/components/ui/button";
 
 export function SignIn() {
   return (
@@ -8,12 +9,9 @@ export function SignIn() {
         await signIn();
       }}
     >
-      <button
-        type="submit"
-        className="hover: rounded bg-blue-500 px-4 py-2 text-white"
-      >
-        Sign in
-      </button>
+      <Button type="submit" className="rounded">
+        Login
+      </Button>
     </form>
   );
 }
@@ -26,12 +24,9 @@ export function SignOut() {
         await signOut();
       }}
     >
-      <button
-        type="submit"
-        className="hover: rounded bg-blue-500 px-4 py-2 text-white"
-      >
+      <Button type="submit" className="rounded">
         Sign out
-      </button>
+      </Button>
     </form>
   );
 }
