@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { useUploadThing } from "~/utils/uploadthing";
 
 // inferred input off useUploadThing
@@ -37,7 +38,7 @@ function UploadIconSVG() {
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="size-6"
+      className="h-6 w-6"
     >
       <path
         stroke-linecap="round"
@@ -51,9 +52,24 @@ function UploadIconSVG() {
 export function SimpleUploadButton() {
   const router = useRouter();
   const { inputProps } = useUploadThingInputProps("imageUploader", {
+    onUploadBegin() {
+      toast("Uploading...", {
+        duration: 20000,
+        id: "upload-begin",
+      });
+    },
+    onUploadError(error) {
+      console.error(error);
+      toast.dismiss("upload-begin");
+      toast.error("Upload failed.");
+    },
     onClientUploadComplete() {
+      toast.dismiss("upload-begin");
+      toast("Upload complete.");
       router.refresh();
     },
+    // see what you can do to make this true at some point.
+    skipPolling: false,
   });
 
   return (

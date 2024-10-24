@@ -4,6 +4,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 
+import { Toaster } from "~/components/ui/sonner";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import Header from "./header";
@@ -28,6 +29,7 @@ export default function RootLayout({
         <div className="grid h-screen grid-rows-[auto,1fr]">
           <Header />
           <main className="overflow-y-scroll">{children}</main>
+          <Toaster />
         </div>
         {modal}
         <div id="modal-root" />
