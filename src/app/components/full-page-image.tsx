@@ -1,5 +1,6 @@
 import { getImage } from "~/server/queries";
 import { auth } from "auth";
+import { Button } from "~/components/ui/button";
 
 export default async function FullPageImageView(props: { photoId: number }) {
   const session = await auth();
@@ -23,6 +24,18 @@ export default async function FullPageImageView(props: { photoId: number }) {
         <div className="flex flex-col p-2">
           <span>Uploaded by:</span>
           <span>{session?.user.name}</span>
+        </div>
+
+        <div className="p-2">
+          <form 
+            action={() => {
+              "use server";
+          }}
+          >
+            <Button type="submit" variant="destructive">
+              Delete
+            </Button>
+          </form>
         </div>
       </div>
     </div>

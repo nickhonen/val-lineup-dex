@@ -1,6 +1,9 @@
 import "server-only";
 import { db } from "./db";
 import { auth } from "auth";
+import { images } from "./db/schema";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 // read the next.js blog post about data access layer
 // apparently I dont need to get user from db, but maybe I should make
@@ -32,4 +35,17 @@ export async function getImage(id: number) {
   if (!image) throw new Error("Image not found");
 
   return image;
+}
+
+export async function deleteImage(id: number) {
+  const session = await auth();
+
+  if (!session?.user) throw new Error("Unauthorized");
+
+  await db
+    .delete(images)
+    .where(and(eq(images.email, session.user.email), eq(images.id, id)));
+
+  revalidatePath("/");
+  redirect("/");
 }
