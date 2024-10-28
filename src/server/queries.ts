@@ -4,6 +4,7 @@ import { auth } from "auth";
 import { images } from "./db/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { and, eq } from "drizzle-orm";
 
 // read the next.js blog post about data access layer
 // apparently I dont need to get user from db, but maybe I should make

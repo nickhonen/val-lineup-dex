@@ -1,10 +1,14 @@
-import { getImage } from "~/server/queries";
+import { deleteImage, getImage } from "~/server/queries";
 import { auth } from "auth";
 import { Button } from "~/components/ui/button";
 
-export default async function FullPageImageView(props: { photoId: number }) {
+export default async function FullPageImageView(props: { photoId: string }) {
+  // getting from url so need to convert to number
+  const idToNumber = Number(props.photoId);
+  if (Number.isNaN(idToNumber)) throw new Error("Invalid photoId");
+
   const session = await auth();
-  const image = await getImage(props.photoId);
+  const image = await getImage(idToNumber);
 
   return (
     <div className="flex h-full w-full min-w-0">
@@ -27,10 +31,11 @@ export default async function FullPageImageView(props: { photoId: number }) {
         </div>
 
         <div className="p-2">
-          <form 
-            action={() => {
+          <form
+            action={async () => {
               "use server";
-          }}
+              await deleteImage(idToNumber);
+            }}
           >
             <Button type="submit" variant="destructive">
               Delete
