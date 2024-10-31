@@ -2,9 +2,8 @@ import "server-only";
 import { db } from "./db";
 import { auth } from "auth";
 import { images } from "./db/schema";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
+import { cache } from "react";
 
 // read the next.js blog post about data access layer
 // apparently I dont need to get user from db, but maybe I should make
@@ -24,7 +23,7 @@ export async function getMyImages() {
   return images;
 }
 
-export async function getImage(id: number) {
+export const getImage = cache(async (id: number) => {
   const session = await auth();
 
   if (!session?.user) throw new Error("Unauthorized");
@@ -33,10 +32,11 @@ export async function getImage(id: number) {
     where: (images, { eq }) => eq(images.id, id),
   });
 
+  console.log("is this still refiring when not in modal.");
   if (!image) throw new Error("Image not found");
 
   return image;
-}
+});
 
 export async function deleteImage(id: number) {
   const session = await auth();
@@ -46,7 +46,4 @@ export async function deleteImage(id: number) {
   await db
     .delete(images)
     .where(and(eq(images.email, session.user.email), eq(images.id, id)));
-
-  revalidatePath("/");
-  redirect("/");
 }

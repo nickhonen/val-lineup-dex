@@ -1,6 +1,7 @@
 import { deleteImage, getImage } from "~/server/queries";
 import { auth } from "auth";
 import { Button } from "~/components/ui/button";
+import { redirect } from "next/navigation";
 
 export default async function FullPageImageView(props: { photoId: string }) {
   // getting from url so need to convert to number
@@ -35,6 +36,7 @@ export default async function FullPageImageView(props: { photoId: string }) {
             action={async () => {
               "use server";
               await deleteImage(idToNumber);
+              redirect("../");
             }}
           >
             <Button type="submit" variant="destructive">

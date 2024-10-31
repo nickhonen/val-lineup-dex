@@ -29,9 +29,9 @@ export default function RootLayout({
         <div className="grid h-screen grid-rows-[auto,1fr]">
           <Header />
           <main className="overflow-y-scroll">{children}</main>
+          {modal}
           <Toaster />
         </div>
-        {modal}
         <div id="modal-root" />
       </body>
     </html>
