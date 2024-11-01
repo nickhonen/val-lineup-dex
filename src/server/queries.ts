@@ -32,7 +32,6 @@ export const getImage = cache(async (id: number) => {
     where: (images, { eq }) => eq(images.id, id),
   });
 
-  console.log("is this still refiring when not in modal.");
   if (!image) throw new Error("Image not found");
 
   return image;
