@@ -9,6 +9,7 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
+import { anonRole, authenticatedRole } from "drizzle-orm/supabase";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -33,12 +34,3 @@ export const images = createTable(
     nameIndex: index("name_idx").on(example.name),
   }),
 );
-
-// export const users = createTable(
-//   "users_table",
-//   {
-//     id: serial("id").primaryKey(),
-//     name: varchar("name", { length: 256 }),
-//     email: text("email").notNull().unique(),
-//   }
-// );
