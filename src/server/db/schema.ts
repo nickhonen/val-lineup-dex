@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
@@ -10,9 +8,7 @@ import {
   serial,
   timestamp,
   varchar,
-  pgPolicy,
 } from "drizzle-orm/pg-core";
-import { anonRole, authenticatedRole } from "drizzle-orm/supabase";
 
 export const createTable = pgTableCreator((name) => `val-lineup-dex_${name}`);
 
@@ -27,13 +23,5 @@ export const images = createTable(
       .notNull(),
     email: varchar("email", { length: 256 }).notNull(),
   },
-  (example) => [
-    index("name_idx").on(example.name),
-    pgPolicy("Enable select for authneticated users", {
-      as: "permissive",
-      to: authenticatedRole,
-      for: "select",
-      withCheck: sql`true`,
-    }),
-  ],
+  (example) => [index("name_idx").on(example.name)],
 );

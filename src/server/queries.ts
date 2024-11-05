@@ -1,6 +1,5 @@
 import "server-only";
 import { db } from "./db";
-import { auth } from "auth";
 import { images } from "./db/schema";
 import { and, eq } from "drizzle-orm";
 import { cache } from "react";
