@@ -16,7 +16,8 @@
   "dependencies": {
     "@auth/core": "^0.35.3",
     "@radix-ui/react-slot": "^1.1.0",
-    "@supabase/supabase-js": "^2.45.1",
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.46.1",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@uploadthing/react": "^6.8.0",
     "class-variance-authority": "^0.7.0",
