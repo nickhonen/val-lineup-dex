@@ -7,6 +7,22 @@ import {
   encodeHexLowerCase,
 } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
+import { cache } from "react";
+import { cookies } from "next/headers";
+
+// copied from example github proj, add await here after migrating
+// caching to use multiple times
+export const getCurrentSession = cache(
+  async (): Promise<SessionValidationResult> => {
+    const token = cookies().get("session")?.value ?? null;
+    if (token === null) {
+      // could add like a getAuthOrRedirect and go to login screen/display some error.
+      return { session: null, user: null };
+    }
+    const result = await validateSessionToken(token);
+    return result;
+  },
+);
 
 // basic structure from lucia-auth
 
