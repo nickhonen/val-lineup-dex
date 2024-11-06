@@ -34,9 +34,9 @@ export const images = createTable(
 
 export const users = createTable("users_table", {
   id: serial("id").primaryKey(),
-  firstName: varchar("first_name", { length: 256 }).notNull(),
-  lastName: varchar("last_name", { length: 256 }).notNull(),
-  email: varchar("email", { length: 256 }).notNull(),
+  name: varchar("first_name", { length: 256 }).notNull(),
+  email: text("email").notNull().unique(),
+  image: text("image", { length: 1024 })
 });
 
 export const sessions = createTable("sessions_table", {

@@ -10,6 +10,7 @@ export function setSessionTokenCookie(token: string, expiresAt: Date): void {
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     expires: expiresAt,
+    maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 year
     path: "/",
   });
 }
