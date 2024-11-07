@@ -10,7 +10,3 @@ export const { GET, POST } = createRouteHandler({
   // Apply an (optional) custom config:
   // config: { ... },
 });
-
-// export function GET() {
-//     return new Response("Hello World");
-// }   

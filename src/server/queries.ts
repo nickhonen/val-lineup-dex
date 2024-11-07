@@ -1,7 +1,7 @@
 import "server-only";
 import { db } from "./db";
 import { auth } from "auth";
-import { images, authImages } from "./db/schema";
+import { authImages } from "./db/schema";
 import { and, eq } from "drizzle-orm";
 import { cache } from "react";
 
@@ -28,7 +28,7 @@ export const getImage = cache(async (id: number) => {
 
   if (!session?.user) throw new Error("Unauthorized");
 
-  const image = await db.query.images.findFirst({
+  const image = await db.query.authImages.findFirst({
     where: (images, { eq }) => eq(images.id, id),
   });
 
@@ -43,6 +43,6 @@ export async function deleteImage(id: number) {
   if (!session?.user) throw new Error("Unauthorized");
 
   await db
-    .delete(images)
-    .where(and(eq(images.email, session.user.email), eq(images.id, id)));
+    .delete(authImages)
+    .where(and(eq(authImages.userId, session.user.id), eq(authImages.id, id)));
 }
