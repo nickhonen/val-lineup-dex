@@ -37,6 +37,7 @@ export const users = createTable("users_table", {
   name: varchar("name", { length: 256 }).notNull(),
   email: text("email").notNull().unique(),
   image: text("image"),
+  googleId: text("google_id").notNull(),
 });
 
 export const sessions = createTable("sessions_table", {
