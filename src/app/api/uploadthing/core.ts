@@ -2,7 +2,7 @@ import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { auth } from "auth";
 import { db } from "~/server/db";
-import { images } from "~/server/db/schema";
+import { authImages } from "~/server/db/schema";
 
 const f = createUploadthing();
 
@@ -20,22 +20,22 @@ export const ourFileRouter = {
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       // nick addition: putting email in bc fuck making ID persist in auth.ts.
-      return { email: session.user.email };
+      return { userId: session.user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for user email:", metadata.email);
+      console.log("Upload complete for user (id):", metadata.userId);
 
-      await db.insert(images).values({
+      await db.insert(authImages).values({
         name: file.name,
         url: file.url,
-        email: metadata.email,
+        userId: metadata.userId,
       });
 
       console.log("file url", file.url);
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.email };
+      return { uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;
 
