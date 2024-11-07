@@ -1,5 +1,5 @@
 import {
-   generateReactHelpers,
+    generateReactHelpers,
     generateUploadButton,
     generateUploadDropzone,
   } from "@uploadthing/react";

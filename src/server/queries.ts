@@ -1,7 +1,7 @@
 import "server-only";
 import { db } from "./db";
 import { auth } from "auth";
-import { images } from "./db/schema";
+import { images, authImages } from "./db/schema";
 import { and, eq } from "drizzle-orm";
 import { cache } from "react";
 
@@ -12,13 +12,13 @@ import { cache } from "react";
 export async function getMyImages() {
   const session = await auth();
 
-  if (!session?.user) return [];
-  if (!session.user.email) throw new Error("Unauthorized");
+  if (session.user) return [];
+  if (!session.user.id) throw new Error("Unauthorized");
 
-  const images = await db.query.images.findMany({
-    where: (images, { eq }) => eq(images.email, session.user.email),
+  const images = await db.query.authImages.findMany({
+    where: (table, { eq }) => eq(table.userId, session.user.id),
     // I think this orders images by newest images first? Right?
-    orderBy: (images, { desc }) => desc(images.id),
+    orderBy: (table, { desc }) => desc(table.id),
   });
   return images;
 }
