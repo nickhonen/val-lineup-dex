@@ -14,7 +14,6 @@ import {
   primaryKey,
   boolean,
 } from "drizzle-orm/pg-core";
-import { anonRole, authenticatedRole } from "drizzle-orm/supabase";
 
 import type { AdapterAccountType } from "next-auth/adapters";
 
