@@ -12,7 +12,7 @@ import { cache } from "react";
 export async function getMyImages() {
   const session = await auth();
 
-  if (session.user) return [];
+  if (!session?.user) return [];
   if (!session.user.id) throw new Error("Unauthorized");
 
   const images = await db.query.authImages.findMany({
