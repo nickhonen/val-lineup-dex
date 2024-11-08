@@ -1,6 +1,6 @@
 import { deleteImage, getImage } from "~/server/queries";
 import { auth } from "auth";
-import { Button } from "~/components/ui/button";
+import { Button } from "~/shadcn/components/ui/button";
 import { redirect } from "next/navigation";
 
 export default async function FullPageImageView(props: { photoId: string }) {

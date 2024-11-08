@@ -1,5 +1,5 @@
 import { signIn, signOut } from "auth";
-import { Button } from "~/components/ui/button";
+import { Button } from "~/shadcn/components/ui/button";
 
 export function SignIn() {
   return (
