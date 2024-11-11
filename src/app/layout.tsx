@@ -10,8 +10,8 @@ import { type Metadata } from "next";
 import Header from "./header";
 
 export const metadata: Metadata = {
-  title: "Valorant Lineup Index",
-  description: "Store and share your lineups for Valorant",
+  title: "CS2 Lineup Index",
+  description: "Store and share your lineups for CS2",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

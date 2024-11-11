@@ -8,14 +8,14 @@ export default async function Images() {
   const images = await getMyImages();
 
   return (
-    <div className="flex flex-wrap p-4">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {images.map((image) => (
-        <div key={image.id} className="flex h-48 w-48 flex-col gap-2">
+        <div key={image.id} className="aspect-w-1 aspect-h-1">
           <Link href={`/image/${image.id}`}>
             <Image
               src={image.url}
               alt={image.name}
-              style={{ objectFit: "contain" }}
+              style={{ objectFit: "cover" }}
               width={480}
               height={480}
             />

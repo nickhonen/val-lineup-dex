@@ -2,5 +2,7 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "editor.formatOnSave": true,
     "prettier.useEditorConfig": true,
-    "emmet.includeLanguages": { "javascript":"javascriptreact" }
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    }
 }

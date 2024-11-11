@@ -16,7 +16,7 @@ export default async function FullPageImageView(props: { photoId: string }) {
       <div className="flex-shrink">
         <img
           src={image.url}
-          className="flex-shrink object-contain"
+          className="max-h-[80vh] max-w-[80vw] flex-shrink object-contain"
           alt={image.name}
         />
       </div>
